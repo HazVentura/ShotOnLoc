@@ -2,7 +2,7 @@
 
 A worldwide map of movie and TV filming locations. Find the exact spot where a scene was shot, see what it looks like today, and add your own photos.
 
-> 🚧 Early development — nothing to run yet.
+> Early development — nothing to run yet.
 
 ## Planned stack
 
