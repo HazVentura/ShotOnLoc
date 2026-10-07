@@ -74,12 +74,12 @@ A worldwide map of filming locations. Users mark **Scenes** from movies and TV s
 | Platform | Progressive Web App first; native apps maybe later (would add REST endpoints) |
 | Database | MySQL 8 with spatial types/indexes (SRID 4326), Docker container on port 3307 |
 | Schema | Flyway migrations (no Hibernate `ddl-auto`) |
-| File storage | S3 API: MinIO locally, Cloudflare R2 in production |
+| File storage | S3 API: RustFS locally (MinIO no longer publishes free Docker images), Cloudflare R2 in production |
 | Title data | TMDB API (attribution notice in footer) |
 | Code structure | Package by feature (`title`, `scene`, `media`, `user`, `importer`, …), modular monolith |
 | Tests | JUnit 5 unit tests + integration tests against real MySQL via Testcontainers |
 | CI | GitHub Actions: build + test on every push |
-| Local dev | `docker compose up` starts MySQL + MinIO |
+| Local dev | `docker compose up` starts MySQL + RustFS |
 | Hosting | Local only for now; later Oracle Cloud Always Free VM |
 | Secrets | Environment variables / `.env` (git-ignored), `.env.example` committed |
 | Repo language | English (code, commits, docs) |
@@ -90,12 +90,12 @@ A worldwide map of filming locations. Users mark **Scenes** from movies and TV s
 
 | # | Milestone | Scope |
 |---|---|---|
-| M0 | Skeleton | Spring Boot app, Docker Compose (MySQL + MinIO), Flyway, i18n setup (DE/EN), GitHub Actions, README |
+| M0 | Skeleton | Spring Boot app, Docker Compose (MySQL + RustFS), Flyway, i18n setup (DE/EN), GitHub Actions, README |
 | M1 | Read-only map | Title + Scene tables, a few seed Scenes via SQL, Leaflet map with clustering, endpoint "Scenes in viewport" |
 | M2 | Wikidata import | SPARQL query, TMDB matching, imported/unconfirmed status |
 | M3 | Accounts | Registration with Invite Code, password login, Google/GitHub OAuth2, manual account linking, admin role, `app.public-read` flag |
 | M4 | Create Scenes | TMDB title search, place/drag pin, duplicate hint, claim imported Scenes, edit rights |
-| M5 | Photos | Upload, browser HEIC conversion, resize/WebP, thumbnail, EXIF → pin proposal, EXIF stripping, MinIO, video links, limits |
+| M5 | Photos | Upload, browser HEIC conversion, resize/WebP, thumbnail, EXIF → pin proposal, EXIF stripping, S3 storage (RustFS), video links, limits |
 | M6 | Discovery | "Near me", title page with mini map |
 | M7 | Social | Profile page, Visits, account deletion with anonymization |
 | M8 | PWA | Manifest, service worker, installable, mobile polish |
